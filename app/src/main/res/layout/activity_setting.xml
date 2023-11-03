@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity">
+
+    <TextView
+        android:id="@+id/border_box"
+        android:layout_width="346dp"
+        android:layout_height="135dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/border"
+        android:gravity="center_vertical"
+        android:paddingLeft="50dp"
+        android:paddingRight="100dp"
+        android:text="로그인이 필요합니다."
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="59dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/circle"
+        android:src="@drawable/baseline_person_24"
+        app:layout_constraintBottom_toBottomOf="@+id/border_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/border_box"
+        app:layout_constraintVertical_bias="0.486" />
+
+    <TextView
+        android:id="@+id/profile"
+        android:layout_width="330dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="4dp"
+        android:text="프로필"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile_img"
+        app:layout_constraintTop_toBottomOf="@+id/border_box" />
+
+    <TextView
+        android:id="@+id/secerit"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="개인정보 보호"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/profile"
+        app:layout_constraintStart_toStartOf="@+id/profile"
+        app:layout_constraintTop_toBottomOf="@+id/profile" />
+
+    <TextView
+        android:id="@+id/app_evaluation"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="앱 평가하기"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/app_evaluation_img"
+        app:layout_constraintEnd_toEndOf="@+id/secerit"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/secerit"
+        app:layout_constraintTop_toTopOf="@+id/app_evaluation_img"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:text="로그아웃"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/logout_img"
+        app:layout_constraintEnd_toEndOf="@+id/app_evaluation"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/app_evaluation"
+        app:layout_constraintTop_toBottomOf="@+id/app_evaluation_img"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/profile_img"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/baseline_person_24"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profile"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profile" />
+
+    <ImageView
+        android:id="@+id/secerit_img"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/baseline_security_24"
+        app:layout_constraintBottom_toBottomOf="@+id/secerit"
+        app:layout_constraintStart_toStartOf="@+id/profile_img"
+        app:layout_constraintTop_toTopOf="@+id/secerit"
+        app:layout_constraintVertical_bias="0.842" />
+
+    <ImageView
+        android:id="@+id/app_evaluation_img"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/baseline_insert_emoticon_24"
+        app:layout_constraintStart_toStartOf="@+id/secerit_img"
+        app:layout_constraintTop_toBottomOf="@+id/secerit_img" />
+
+    <ImageView
+        android:id="@+id/logout_img"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/baseline_logout_24"
+        app:layout_constraintStart_toStartOf="@+id/app_evaluation_img"
+        app:layout_constraintTop_toBottomOf="@+id/app_evaluation_img" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

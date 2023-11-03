@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/etd_box">
+
+    <ImageButton
+        android:id="@+id/playBtn_itemAudio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/baseline_play_circle_24"
+        android:contentDescription="녹음파일목록 아이콘"/>
+    <!-- 만약 감정 이모지가 동적으로 들어갈 수 있다면 넣기 -->
+
+    <TextView
+        android:id="@+id/audioTitle_itemAudio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
+
+</LinearLayout>

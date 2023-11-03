@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Capstone Final Diary</string>
+    <string name="default_web_client_id" translatable="false">282119701518-h2h67759oluqleiq2jciuhk1bgq3vbfn.apps.googleusercontent.com</string>
+    <string name="root_firebase_uri">"gs://finalcapstone-749d2.appspot.com"</string>
+</resources>

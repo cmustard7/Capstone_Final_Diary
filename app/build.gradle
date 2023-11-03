@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.application'
+    // Add the Google services Gradle plugin
+    id 'com.google.gms.google-services'
+
+}
+
+android {
+    namespace 'com.example.capstonefinaldiary'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.capstonefinaldiary"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:32.4.0')
+
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth:22.2.0'
+
+    // firebase Storage
+    // Firebase SDK 추가
+    implementation 'com.google.firebase:firebase-storage:20.0.0' // 적절한 버전으로 변경 가능
+
+    // google-services 플러그인 추가
+    apply plugin: 'com.google.gms.google-services'
+
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.google.firebase:firebase-database:20.3.0'
+    
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.squareup.picasso:picasso:2.8'
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+}
