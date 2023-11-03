@@ -195,7 +195,7 @@ public class RecordActivity extends AppCompatActivity {
             String currentTime = sdf.format(new Date());
 
             audioFileName = getExternalCacheDir().getAbsolutePath() + "/Record_" + currentTime + ".aac";
-            //audioFileName = "audio/Record_" + System.currentTimeMillis() + ".aac";
+
             // Firebase Storage 루트 경로 설정 (수정)
             storageRef = storage.getReference().child("audio");
             //storageRef = storage.getReferenceFromUrl("gs://finalcapstone-749d2.appspot.com").child(audioFileName);

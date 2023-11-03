@@ -1,5 +1,11 @@
 package com.example.capstonefinaldiary;
 
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -12,13 +18,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.capstonefinaldiary.Models.AudioFileInfo;
+
 import java.io.File;
 import java.util.ArrayList;
 
 public class AudioAdapter extends RecyclerView.Adapter{
 
     //리사이클러뷰에 넣을 데이터 리스트
-    private ArrayList<Uri> dataModels;
+    private ArrayList<AudioFileInfo> dataModels;
     private Context context;
 
     // 리스너 객체 참조를 저장하는 변수
@@ -44,7 +53,7 @@ public class AudioAdapter extends RecyclerView.Adapter{
     }
 
     //생성자를 통하여 데이터 리스트 context를 받음
-    public AudioAdapter(Context context, ArrayList<Uri> dataModels) {
+    public AudioAdapter(Context context, ArrayList<AudioFileInfo> dataModels) {
         this.dataModels = dataModels;
         this.context = context;
     }
@@ -72,10 +81,7 @@ public class AudioAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder = (MyViewHolder)holder;
 
-        String uriName = String.valueOf(dataModels.get(position));
-        File file = new File(uriName);
-
-        myViewHolder.audioTitle.setText(file.getName());
+        ((MyViewHolder) holder).audioTitle.setText(dataModels.get(position).getFilename());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

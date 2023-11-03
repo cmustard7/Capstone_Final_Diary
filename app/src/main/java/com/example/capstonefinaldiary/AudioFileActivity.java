@@ -26,6 +26,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.capstonefinaldiary.Models.AudioFileInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +55,9 @@ public class AudioFileActivity extends AppCompatActivity {
     /** 리사이클러뷰 */
     private RecyclerView audioRecyclerView;
     private AudioAdapter audioAdapter;
-    private ArrayList<Uri> audioList;
+    private ArrayList<AudioFileInfo> audioList;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
 
     /** 검색창 */
     private SearchView searchView;
@@ -78,19 +87,39 @@ public class AudioFileActivity extends AppCompatActivity {
 
         // 리사이클러뷰 초기화
         audioRecyclerView = findViewById(R.id.recyclerview);
-        //getIntent()를 통해 녹음 파일 리스트 받기
-        //audioList = getIntent().getParcelableArrayListExtra("recordedUris");
-        /** 저장된 URI 목록을 불러옵니다 */
-        audioList = loadRecordedUris();
-        // Adapter에 데이터가 변경되었음을 알림
-        audioAdapter = new AudioAdapter(this, audioList);
-        audioRecyclerView.setAdapter(audioAdapter);
+        audioRecyclerView.setHasFixedSize(true); //리사이클러뷰 성능강화
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         audioRecyclerView.setLayoutManager(mLayoutManager);
+        audioList = new ArrayList<>(); //오디오 파일정보를 담을 리스트(어댑터쪽으로)
 
-        audioAdapter.notifyDataSetChanged();
+        database = FirebaseDatabase.getInstance(); // Firebase database 연동
+        databaseReference = database.getReference("audios"); //DB 테이블 연결
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                audioList.clear(); //기존 배열리스트가 존재하지 않게 초기화
+                for (DataSnapshot snapshot1 : dataSnapshot.getChildren()){
+                    // 반복문으로 데이터 리스트 추출
+                    AudioFileInfo audioFileInfo = snapshot1.getValue(AudioFileInfo.class); // 만들어둔 AudioFileInfo 클래스 객체에 데이터 담음
+                    audioList.add(audioFileInfo); // 담은 데이터들을 배열 리스트에 넣고 리사이클러뷰로 보낼 준비
+                    audioAdapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // DB를 가져오던 중 에러 발생시
+                // 에러문 출력
+                Log.e("AudioFileActivity", String.valueOf(error.toException()));
+            }
+        });
+
+        // Adapter에 데이터가 변경되었음을 알림
+        audioAdapter = new AudioAdapter(this, audioList);
+        audioRecyclerView.setAdapter(audioAdapter); // 리사이클러뷰 어댑터 연결
 
         // 변수 초기화
         audioIcon = null;
@@ -147,19 +176,6 @@ public class AudioFileActivity extends AppCompatActivity {
             }
         });
 
-    }
-    // 녹음 파일 목록을 SharedPreferences에서 불러오는 함수
-    private ArrayList<Uri> loadRecordedUris() {
-        SharedPreferences preferences = getSharedPreferences("EDM", Context.MODE_PRIVATE);
-        Set<String> uriStrings = preferences.getStringSet("recorded_uris", new HashSet<String>());
-
-        // Set을 ArrayList로 변환
-        ArrayList<Uri> recordedUris = new ArrayList<>();
-        for (String uriString : uriStrings) {
-            recordedUris.add(Uri.parse(uriString));
-        }
-
-        return recordedUris;
     }
 
     // 녹음 파일 재생
